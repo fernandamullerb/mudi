@@ -1,6 +1,6 @@
 ## 💻 Projeto
 
-O Mudi é uma aplicação web na qual é possível cadastrar pedidos e gerar ofertas para pedidos de outros usuários, incluindo informações como valor e data de entrega. <br><br>
+Mudi é uma aplicação web na qual é possível cadastrar pedidos e gerar ofertas para pedidos de outros usuários, incluindo informações como valor e data de entrega. <br><br>
 O projeto foi desenvolvido nos cursos de <b>Spring MVC</b> da formação em Spring Framework da Alura.
 
 
@@ -20,5 +20,5 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 🔖 Layout
 
 <p align="center">
-  <img alt="mudi-home" src="https://github.com/fernandamullerb/mudi/blob/main/mudi-home.png" width="60%">
+  <img alt="mudi-home" src="https://github.com/fernandamullerb/mudi/blob/main/mudi-template.png" width="80%">
 </p>
