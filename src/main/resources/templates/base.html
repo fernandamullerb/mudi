@@ -1,0 +1,25 @@
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Handlee' rel='stylesheet'>
+	<style>
+		.logo-container {
+			background-color: #47bcff;
+			color: #FFF;
+		}
+		.logo {
+		    font-family: 'Handlee', cursive;
+		    font-size: 2.5rem;
+		}
+		.jumbotrom {
+			background-color: #D9D9D9;
+		}
+	</style>
+</head>
+<div th:fragment="logo" class="logo-container mb-3 p-3 d-flex justify-content-between">
+	<span class="logo">mudi</span>
+	<span class="mt-3">login</span>
+</div>
+<div th:fragment="titulo(valor)" class="container-fluid jumbotrom p-5 mb-0">
+	<h1 class="display-4" th:text="${valor}"></h1>
+</div>
