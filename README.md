@@ -10,8 +10,10 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - HTML
 - CSS
-- Bootsrap
+- Bootstrap
 - Thymeleaf
+- Vue.js
+- AJAX
 - Java 11
 - Spring Framework
 - MySQL
