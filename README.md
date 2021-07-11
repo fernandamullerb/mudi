@@ -22,5 +22,5 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 🔖 Layout
 
 <p align="center">
-  <img alt="mudi-home" src="https://github.com/fernandamullerb/mudi/blob/main/mudi-template.png" width="80%">
+  <img alt="mudi-home" src="https://github.com/fernandamullerb/mudi/blob/main/mudi.png" width="70%">
 </p>
