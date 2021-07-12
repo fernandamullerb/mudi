@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import br.com.fernandamullerb.mudi.model.Oferta;
 
 public class OfertaDto {
@@ -11,8 +14,13 @@ public class OfertaDto {
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	private Long pedidoId;
+	
+	@NotNull @Pattern(regexp = "^\\d+(\\.\\d+{2})?$")
 	private String valor;
+	
+	@NotNull @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$")
 	private String dataEntrega;
+	
 	private String comentario;
 	
 	public Long getPedidoId() {
@@ -50,7 +58,7 @@ public class OfertaDto {
 	public Oferta toOferta() {
 		Oferta oferta = new Oferta();
 		oferta.setComentario(comentario);
-		oferta.setDataEntrega(LocalDate.parse(comentario, formatter));
+		oferta.setDataEntrega(LocalDate.parse(dataEntrega, formatter));
 		oferta.setValor(new BigDecimal(valor));
 		return oferta;
 	}

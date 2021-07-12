@@ -2,7 +2,6 @@ package br.com.fernandamullerb.mudi.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

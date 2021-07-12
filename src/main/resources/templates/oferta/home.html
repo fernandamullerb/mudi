@@ -9,18 +9,34 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-12 col-sm-8 mb-3">
-							<div class="row ">
-								<div class="col-md-5">Valor: <input/></div>
-								<div class="col-md-6">Data da entrega: <input/></div>
-							</div>
 							<div>Produto</div>
 							<div>
 								<a class="form-control" v-bind:href="pedido.urlProduto">{{pedido.nomeProduto}}</a>
 							</div>
-							<div>Descrição</div>
+							<div class="mt-3">Descrição</div>
 							<div>
-								<textarea class="form-control">{{pedido.descricao}}</textarea>
+								<textarea disabled="disabled" class="form-control">{{pedido.descricao}}</textarea>
 							</div>
+							<div class="row mt-3">
+								<div class="col-md-5">
+									Valor: <input v-bind:class="{'is-invalid':pedido.erros.valor !==''}" class="form-control" v-model="pedido.valorNegociado"/>
+									<div v-if="pedido.erros.valor" class="invalid-feedback" >
+										{{pedido.erros.valor}}
+									</div>
+								</div>
+								<div class="col-md-7">
+									Data da entrega: <input v-bind:class="{'is-invalid':pedido.erros.dataEntrega !==''}" class="form-control" v-model="pedido.dataEntrega"/>
+									<div v-if="pedido.erros.dataEntrega" class="invalid-feedback">
+										{{pedido.erros.dataEntrega}}
+									</div>
+								</div>
+							</div>
+							<div class="mt-3">
+								<label>Comentários</label>
+								<textarea class="form-control">{{pedido.comentario}}</textarea>
+							</div>
+							<button v-if="pedido.ofertaEnviada" disabled="disabled" class="btn btn-success mt-3">Oferta Enviada</button>
+							<button v-else v-on:click="enviarOferta(pedido)" class="btn btn-primary mt-3">Enviar Oferta</button>
 						</div>
 						<div class="col-12 col-sm-4">
 							<div>
@@ -32,19 +48,51 @@
 			</div>
 		</div>
 		<script>
-			function onLoad() {
-				var app = new Vue({
-					 el: '#ofertas',
-					 data: {
-					    pedidos: []
-					 },
-					 mounted () {
+		function onLoad() {
+			var app = new Vue(
+			{
+				el : '#ofertas',
+				data : {
+					pedidos : []
+				},
+				mounted () {
+					axios
+				      .get('http://localhost:8080/api/pedidos/aguardando')
+				      .then(response => {
+				    	  	response.data.forEach(pedido =>{
+				    	  		pedido.ofertaEnviada = false;
+				    	  		pedido.erros = {
+				    	  			valor: '',
+				    	  			dataEntrega: ''
+				    	  		}
+				    	  	})
+				    	 	this.pedidos = response.data
+				    	})
+				},
+				methods: {
+					enviarOferta: function(pedido) {
+						pedido.erros = {
+		    	  			valor: '',
+		    	  			dataEntrega: ''
+		    	  		};
+						
 						axios
-						   .get('http://localhost:8080/api/pedidos/aguardando')
-						   .then(response => (this.pedidos = response.data))
-					}
-				});
-			}
+					      .post('http://localhost:8080/api/ofertas', {
+					    	  pedidoId: pedido.id,
+					    	  valor: pedido.valorNegociado,
+					    	  dataEntrega: pedido.dataEntrega,
+					    	  comentario: pedido.comentario
+					      })
+					      .then(response => pedido.ofertaEnviada = true)
+					      .catch(error => {
+					    	  error.response.data.errors.forEach(error => {
+					    		  pedido.erros[error.field] = error.defaultMessage;
+					    	  })
+					      })
+					} 
+				}
+			});
+		}
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
